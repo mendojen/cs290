@@ -7,14 +7,14 @@ app.set('port', 3000);
 app.get('/',function(req,res){
   res.type('text/plain');
   res.send('Welcome to the main page!');
+  function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 });
 
 app.get('/other-page',function(req,res){
   res.type('text/plain');
   res.send('Welcome to the other page!');
-  function getRandomArbitrary(1, 10) {
-  return Math.random() * (10 - 1) + 1;
-}
 });
 
 app.use(function(req,res){
