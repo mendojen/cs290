@@ -14,6 +14,15 @@ app.get('/',function(req,res){
 app.get('/other-page',function(req,res){
   res.render('other-page');
 });
+function genContext(){
+  var stuffToDisplay = {};
+  stuffToDisplay.time = (new Date(Date.now())).toLocaleTimeString('en-US');
+  return stuffToDisplay;
+}
+
+app.get('/time',function(req,res){
+  res.render('time', genContext());
+});
 
 app.use(function(req,res){
   res.status(404);
@@ -26,15 +35,7 @@ app.use(function(err, req, res, next){
   res.status(500);
   res.render('500');
 });
-function genContext(){
-  var stuffToDisplay = {};
-  stuffToDisplay.time = (new Date(Date.now())).toLocaleTimeString('en-US');
-  return stuffToDisplay;
-}
 
-app.get('/time',function(req,res){
-  res.render('time', genContext());
-});
 
 app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
