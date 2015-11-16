@@ -17,6 +17,7 @@ app.get('/getrequest',function(req,res){
   for (var p in req.query){
     getData.push({'name':p,'value':req.query[p]})
   }
+  //depending on which function is called, the variable type will have the appropriate request name
   var context = {type: "GET"};
   context.dataList = getData;
   res.render('received', context);
