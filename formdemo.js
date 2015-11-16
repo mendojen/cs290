@@ -19,7 +19,7 @@ app.get('/getrequest',function(req,res){
   }
   var context = {};
   context.dataList = qParams;
-  res.render('get-loopback-improved', context);
+  res.render('getreceived', context);
 });
 
 app.post('/getrequest', function(req,res){
@@ -31,7 +31,7 @@ app.post('/getrequest', function(req,res){
   console.log(req.body);
   var context = {};
   context.dataList = qParams;
-  res.render('post-loopback', context);
+  res.render('postreceived', context);
 });
 
 app.use(function(req,res){
