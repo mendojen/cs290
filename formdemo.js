@@ -32,9 +32,8 @@ app.post('/getrequest', function(req,res){
 	}
   console.log(postData);
   console.log(req.body);
-  var context = {reqType: "POST"};
+  var context = {};
   context.dataList = postData;
-
   res.render('received', context);
 });
 
