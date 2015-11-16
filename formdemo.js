@@ -12,7 +12,7 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 3333);
 
-app.get('/get',function(req,res){
+app.get('/getrequest',function(req,res){
   var getData = [];
   for (var p in req.query){
     getData.push({'name':p,'value':req.query[p]})
