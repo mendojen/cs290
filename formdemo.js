@@ -19,7 +19,7 @@ app.get('/getrequest',function(req,res){
   }
   var context = {};
   context.dataList = getData;
-  res.render('getreceived', context);
+  res.render('received', context);
 });
 
 app.post('/getrequest', function(req,res){
@@ -32,9 +32,10 @@ app.post('/getrequest', function(req,res){
 	}
   console.log(postData);
   console.log(req.body);
-  var context = {};
+  var context = {reqType: "POST"};
   context.dataList = postData;
-  res.render('postreceived', context);
+
+  res.render('received', context);
 });
 
 app.use(function(req,res){
