@@ -17,7 +17,7 @@ app.get('/getrequest',function(req,res){
   for (var p in req.query){
     getData.push({'name':p,'value':req.query[p]})
   }
-  var context = {reqType: "GET"};
+  var context = {type: "GET"};
   context.dataList = getData;
   res.render('received', context);
 });
@@ -32,7 +32,7 @@ app.post('/getrequest', function(req,res){
 	}
   console.log(postData);
   console.log(req.body);
-  var context = {reqType: "POST"};
+  var context = {type: "POST"};
   context.dataList = postData;
   res.render('received', context);
 });
