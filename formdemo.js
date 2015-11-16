@@ -12,10 +12,6 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
-app.get('/',function(req,res){
-  res.render('home.handlebars') //We can omit the .handlebars extension as we do below
-});
-
 app.get('/get-loopback-improved',function(req,res){
   var qParams = [];
   for (var p in req.query){
@@ -36,25 +32,6 @@ app.post('/post-loopback', function(req,res){
   var context = {};
   context.dataList = qParams;
   res.render('post-loopback', context);
-});
-
-app.get('/show-data',function(req,res){
-  var context = {};
-  context.sentData = req.query.myData;
-  res.render('show-data', context);
-});
-
-app.get('/other-page',function(req,res){
-  res.render('other-page');
-});
-function genContext(){
-  var stuffToDisplay = {};
-  stuffToDisplay.time = (new Date(Date.now())).toLocaleTimeString('en-US');
-  return stuffToDisplay;
-}
-
-app.get('/time',function(req,res){
-  res.render('time', genContext());
 });
 
 app.use(function(req,res){
