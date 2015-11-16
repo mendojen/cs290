@@ -10,16 +10,15 @@ app.set('port', 3000);
 app.get('/',function(req,res){
   res.render('home.handlebars') //We can omit the .handlebars extension as we do below
 });
-app.get('/get-loopback',function(req,res){
-  var qParams = "";
+
+app.get('/get-loopback-improved',function(req,res){
+  var qParams = [];
   for (var p in req.query){
-    qParams += "The name " + p + " contains the value " + req.query[p] + ", ";
+    qParams.push({'name':p,'value':req.query[p]})
   }
-  qParams = qParams.substring(0,qParams.lastIndexOf(','));
-  qParams += '.';
   var context = {};
   context.dataList = qParams;
-  res.render('get-loopback', context);
+  res.render('get-loopback-improved', context);
 });
 
 app.get('/show-data',function(req,res){
