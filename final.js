@@ -59,6 +59,17 @@ app.get('/simple-update',function(req,res,next){
     res.render('home',context);
   });
 });
+app.get('/delete', function(req,res,next){
+	var context{};
+	mysql.poop.query("DELETE FROM todo WHERE id=?", [req.query.id], function (err, result){
+		if(err){
+			next(err);
+			return;
+		}
+		contect.results="Deleted "+result.changedRows+" rows.";
+		res.render('home', context);
+	});
+});
 app.get('/safe-update',function(req,res,next){
   var context = {};
   mysql.pool.query("SELECT * FROM todo WHERE id=?", [req.query.id], function(err, result){
