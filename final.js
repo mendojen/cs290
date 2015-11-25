@@ -66,7 +66,7 @@ app.get('/delete', function(req,res,next){
 			next(err);
 			return;
 		}
-		contect.results="Deleted "+result.changedRows+" rows.";
+		context.results="Deleted "+result.changedRows+" rows.";
 		res.render('home', context);
 	});
 });
