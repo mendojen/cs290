@@ -60,7 +60,7 @@ app.get('/simple-update',function(req,res,next){
   });
 });
 app.get('/delete', function(req,res,next){
-	var context{};
+	var context={};
 	mysql.poop.query("DELETE FROM todo WHERE id=?", [req.query.id], function (err, result){
 		if(err){
 			next(err);
