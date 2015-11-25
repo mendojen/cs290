@@ -1,12 +1,14 @@
 var express= require('express');
 var mysql= require('./database.js');
+var http= require('http');
+
 
 var app= express();
-var handlebars=require('express-handlebars').create({defaultLayout:'main'});
 
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
-app.set('port', 3000);
+
+http.createServer(function(req,res)){
+	res.writeHead(200,{'Content-Type':'text/plain'});
+}).listen(3000);
 
 app.get('/',function(req,res,next){
   var context = {};
