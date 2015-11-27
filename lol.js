@@ -22,7 +22,7 @@ app.get('/summonerid',function(req,res,next){
       context.riot = body;
       document.getElementById('user').textContent = response.id;
       res.render('userid', context)  
-});
+}));
 app.get('/city',function(req,res,next){
   var context = {};
   request('http://api.openweathermap.org/data/2.5/weather?q='+ req.query.city + '&APPID=' + credentials.riotKey, function(err, response, body){
