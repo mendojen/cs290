@@ -15,6 +15,21 @@ app.get('/', function (req,res){
   res.render('homepage', context)
 });
 
+app.get('/recentgames', function(req, res, next){
+  var context = {};
+  request('https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/'+ req.query.summonerid +'/recent?api_key=' + credentials.riotKey, function(err, response, body){
+    if(!err && response.statusCode < 400){
+      context.riot = body;
+      res.render('recent',context);
+    } else {
+      if(response){
+        console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+});
+
 app.get('/summonerid', function(req, res, next){
   var context = {};
   request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.id +'?api_key=' + credentials.riotKey, function(err, response, body){
@@ -31,20 +46,7 @@ app.get('/summonerid', function(req, res, next){
 });
 
   
-app.get('/recentgames', function(req, res, next){
-  var context = {};
-  request('https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/'+ req.query.summonerid +'/recent?api_key=' + credentials.riotKey, function(err, response, body){
-    if(!err && response.statusCode < 400){
-      context.riot = body;
-      res.render('recent',context);
-    } else {
-      if(response){
-        console.log(response.statusCode);
-      }
-      next(err);
-    }
-  });
-});
+
 
 app.use(function(req,res){
   res.status(404);
