@@ -22,6 +22,8 @@ app.get('/summonerid',function(req,res,next){
   function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
+      var obj=JSON.parse(context);
+      document.getElementById("userid").innerHTML = obj.id;
       request({
         "url":"http://httpbin.org/post",
         "method":"POST",
