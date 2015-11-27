@@ -20,6 +20,7 @@ app.get('/recentgames', function(req, res, next){
   request('https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/'+req.query.userid+'/recent?api_key='+credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
+      console.log(riot.games[0].gameMode);
       res.render('recent',context);
     } else {
       if(response){
