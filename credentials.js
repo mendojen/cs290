@@ -1,3 +1,3 @@
 module.exports = {
-	riotKey: 'f4ff0d1d44a14580afea7c423f425c24'
+	riotKey: 'f4ff0d1d-44a1-4580-afea-7c423f425c24'
 }
