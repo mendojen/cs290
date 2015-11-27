@@ -31,32 +31,13 @@ app.get('/summonerid', function(req, res, next){
 });
 
   
-app.get('/city',function(req,res,next){
+app.get('/recentgames', function(req, res, next){
   var context = {};
-  request('http://api.openweathermap.org/data/2.5/weather?q='+ req.query.city + '&APPID=' + credentials.riotKey, function(err, response, body){
+  request('https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/'+ req.query.summonerid +'/recent?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
-      request({
-        "url":"http://httpbin.org/post",
-        "method":"POST",
-        "headers":{
-          "Content-Type":"application/json"
-        },
-        "body":'{"foo":"bar","number":1}'
-      }, function(err, response, body){
-        if(!err && response.statusCode < 400){
-          context.httpbin = body;
-          res.render('home',context);
-        }else{
-          console.log(err);
-          if(response){
-            console.log(response.statusCode);
-          }
-          next(err);
-        }
-      });
+      res.render('recent',context);
     } else {
-      console.log(err);
       if(response){
         console.log(response.statusCode);
       }
