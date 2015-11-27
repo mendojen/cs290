@@ -23,7 +23,6 @@ app.get('/summonerid', function(req, res, next){
       context.riot = JSON.parse(body);
        console.log(context.riot.id);
        var userinput= req.query.user;
-        console.log(context.riot.userinput.id);
          console.log(context.riot.userinput[0].id);
       res.render('userid',context);
      
