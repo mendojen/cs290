@@ -22,7 +22,7 @@ app.get('/summonerid',function(req,res,next){
       context.riot = body;
       document.getElementById('user').textContent = response.id;
       res.render('userid', context)  
-   })
+   });
 });
 
 
