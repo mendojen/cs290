@@ -23,7 +23,7 @@ app.get('/summonerid', function(req, res, next){
       context.riot = body;
       var userinput=' '+ req.query.user + ' ';
       var mainuserinput=userinput.replace(" ", "");
-      console.log(context.riot.mainuserinput.id);
+      console.log(context.riot."mem0rylapse".id);
       res.render('userid',context);
      
     } else {
