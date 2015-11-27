@@ -17,7 +17,7 @@ app.get('/', function (req,res){
 
 app.get('/recentgames', function(req, res, next){
   var context = {};
-  request('https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/'+ req.query.id +'/recent?api_key=' + credentials.riotKey, function(err, response, body){
+  request('https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/'+ req.query.userid +'/recent?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
       res.render('recent',context);
@@ -32,7 +32,7 @@ app.get('/recentgames', function(req, res, next){
 
 app.get('/summonerid', function(req, res, next){
   var context = {};
-  request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.id +'?api_key=' + credentials.riotKey, function(err, response, body){
+  request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
       res.render('userid',context);
