@@ -24,8 +24,8 @@ app.get('/summonerid',function(req,res,next){
       var response = JSON.parse(req.responseText);
        document.getElementById('userid').textContent = res.id;
        res.render('userid',context);
-    }
-  }));
+    });
+  }});
   
 app.get('/city',function(req,res,next){
   var context = {};
