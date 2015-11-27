@@ -22,10 +22,34 @@ app.get('/summonerid',function(req,res,next){
   function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
-      var response = JSON.parse(req.responseText);
-       document.getElementById('userid').textContent = res.id;
-       res.render('userid',context);
-}})});
+      request({
+        "url":"http://httpbin.org/post",
+        "method":"POST",
+        "headers":{
+          "Content-Type":"application/json"
+        },
+        "body":'{"foo":"bar","number":1}'
+      }, function(err, response, body){
+        if(!err && response.statusCode < 400){
+          context.httpbin = body;
+          res.render('userid',context);
+        }else{
+          console.log(err);
+          if(response){
+            console.log(response.statusCode);
+          }
+          next(err);
+        }
+      });
+    } else {
+      console.log(err);
+      if(response){
+        console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+});
   
 app.get('/city',function(req,res,next){
   var context = {};
