@@ -20,6 +20,7 @@ app.get('/summonerid',function(req,res,next){
   request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
+      document.getElementById('user').textContent = response.id;
       res.render('userid', context)  
 });
 app.get('/city',function(req,res,next){
