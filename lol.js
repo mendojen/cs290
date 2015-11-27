@@ -23,9 +23,6 @@ app.get('/summonerid',function(req,res,next){
       context.riot = body;
       var response = JSON.parse(req.responseText);
 	document.getElementById('userid').textContent = response.id;
-      }, function(err, response, body){
-        if(!err && response.statusCode < 400){
-          context.httpbin = body;
           res.render('userid',context);
         }else{
           console.log(err);
