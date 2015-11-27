@@ -17,11 +17,11 @@ app.get('/', function (req,res){
 
 app.get('/summonerid', function(req, res, next){
   var apiKey = "hidden-from-view";
-  var context = {type: context.riot.id };
+  var context = {};
   request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = JSON.parse(body);
-      res.render('userid',context);
+      res.render('userid',context.riot.id);
       console.log(context.riot.id);
     } else {
       if(response){
