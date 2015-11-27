@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 app.get('/', function (req,res){
    var context = {};
-  res.render('form', context)
+  res.render('homepage', context)
 });
 
 app.get('/zip',function(req,res,next){
