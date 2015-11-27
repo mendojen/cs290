@@ -22,7 +22,7 @@ app.get('/summonerid', function(req, res, next){
     if(!err && response.statusCode < 400){
       context.riot = JSON.parse(body);
       res.render('userid',context);
-      console.log(riot.id);
+      console.log(body.id);
     } else {
       if(response){
         console.log(response.statusCode);
