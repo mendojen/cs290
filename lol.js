@@ -22,25 +22,11 @@ app.get('/summonerid',function(req,res,next){
     if(!err && response.statusCode < 400){
       context.riot = body;
       var response = JSON.parse(req.responseText);
-	document.getElementById('userid').textContent = response.id;
-          res.render('userid',context);
-        }else{
-          console.log(err);
-          if(response){
-            console.log(response.statusCode);
-          }
-          next(err);
-        }
-      });
-    } else {
-      console.log(err);
-      if(response){
-        console.log(response.statusCode);
-      }
-      next(err);
+       document.getElementById('userid').textContent = res.id;
+       res.render('userid',context);
     }
-  });
-});
+  }));
+  
 app.get('/city',function(req,res,next){
   var context = {};
   request('http://api.openweathermap.org/data/2.5/weather?q='+ req.query.city + '&APPID=' + credentials.riotKey, function(err, response, body){
