@@ -15,36 +15,15 @@ app.get('/', function (req,res){
   res.render('homepage', context)
 });
 
-
-app.get('/summonerid',function(req,res,next){
+app.get('/summonerid', function(req, res, next){
+  var apiKey = "hidden-from-view";
   var context = {};
-  request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey,
-  function(err, response, body){
+  request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey', function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
-     var obj=JSON.parse(context.riot);
-     req.send(JSON.stringify(context.riot));
-      request({
-        "url":"http://httpbin.org/post",
-        "method":"POST",
-        "headers":{
-          "Content-Type":"application/json"
-        },
-        "body":'{"foo":"bar","number":1}'
-      }, function(err, response, body){
-        if(!err && response.statusCode < 400){
-          context.httpbin = body;
-          res.render('userid',context);
-        }else{
-          console.log(err);
-          if(response){
-            console.log(response.statusCode);
-          }
-          next(err);
-        }
-      });
+      res.render('userid',context);
+      console.log(body.id);
     } else {
-      console.log(err);
       if(response){
         console.log(response.statusCode);
       }
@@ -52,6 +31,7 @@ app.get('/summonerid',function(req,res,next){
     }
   });
 });
+
   
 app.get('/city',function(req,res,next){
   var context = {};
