@@ -18,14 +18,14 @@ app.get('/', function (req,res){
 
 app.get('/summonerid',function(req,res,next){
   var context = {};
-  request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
+  request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey,
+  function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
       var response = JSON.parse(req.responseText);
        document.getElementById('userid').textContent = res.id;
        res.render('userid',context);
-    });
-  }});
+}})});
   
 app.get('/city',function(req,res,next){
   var context = {};
