@@ -16,19 +16,18 @@ app.get('/', function (req,res){
 });
 
 
-
+		var response = JSON.parse(req.responseText);
+		document.getElementById('city').textContent = response.name;
+		document.getElementById('temperature').textContent = response.main.temp;
+		document.getElementById('humidity').textContent = response.main.humidity;
 
 app.get('/summonerid',function(req,res,next){
   var context = {};
   request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
-      request({
-        "url":"http://httpbin.org/post",
-        "method":"POST",
-        "headers":{
-          "Content-Type":"application/json"
-        },
+      var response = JSON.parse(req.responseText);
+		document.getElementById('userid').textContent = response.id;
         "body":'{"foo":"bar","number":1}'
       }, function(err, response, body){
         if(!err && response.statusCode < 400){
