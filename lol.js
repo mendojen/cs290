@@ -14,6 +14,10 @@ app.get('/', function (req,res){
    var context = {};
   res.render('homepage', context)
 });
+Handlebars.registerHelper("userinfo", function (info){
+   info = (context.riot.games[0].gameMode).toString();
+   return info;
+})
 
 app.get('/recentgames', function(req, res, next){
   var context = {};
