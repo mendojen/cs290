@@ -22,7 +22,6 @@ app.get('/recentgames', function(req, res, next){
     if(!err && response.statusCode < 400){
       context.riot = body;
   //     console.log(context.riot.games[0].gameMode);
-      var userinput=JSON.stringify(context.riot);
       res.render('recent',context);
      
       
