@@ -29,6 +29,20 @@ app.get('/recentgames', function(req, res, next){
     }
   });
 });
+app.get('/champion', function(req, res, next){
+  var context = {};
+  request('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + req.query.champ_id + '?api_key=' + credentials.riotKey, function(err, response, body){
+    if(!err && response.statusCode < 400){
+      context.riot = body;
+      res.render('champ',context);
+    } else {
+      if(response){
+        console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+});
 
 app.get('/summonerid', function(req, res, next){
   var context = {};
