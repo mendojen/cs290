@@ -23,7 +23,7 @@ app.get('/recentgames', function(req, res, next){
       context.riot = JSON.parse(body);
       var userinput=JSON.stringify(context.riot.games[0].gameMode);
       res.render('recent',context);
-             console(context.riot.games[0].gameMode);
+      console(context.riot.games[0].gameMode);
       
     } else {
       if(response){
