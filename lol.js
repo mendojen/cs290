@@ -14,7 +14,9 @@ app.get('/', function (req,res){
    var context = {};
   res.render('homepage', context)
 });
-
+Template.registerHelper("information", function(something) {
+  console.log(context.riot.games[0].gameMode);
+});
 app.get('/recentgames', function(req, res, next){
   var context = {};
   request('https://na.api.pvp.net/api/lol/' + req.query.region + '/v1.3/game/by-summoner/'+req.query.userid+'/recent?api_key=' + credentials.riotKey, function(err, response, body){
