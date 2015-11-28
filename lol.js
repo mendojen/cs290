@@ -17,7 +17,7 @@ app.get('/', function (req,res){
 
 app.get('/recentgames', function(req, res, next){
   var context = {};
-  request('https://na.api.pvp.net/api/lol/' + req.query.region + '/v1.3/game/by-summoner/'+req.query.userid+'/recent?api_key='+credentials.riotKey, function(err, response, body){
+  request('https://na.api.pvp.net/api/lol/' + req.query.region + '/v1.3/game/by-summoner/'+req.query.userid+'/recent?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
       res.render('recent',context);
