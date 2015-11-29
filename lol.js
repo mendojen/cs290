@@ -21,21 +21,20 @@ app.get('/recentgames', function(req, res, next){
   request('https://na.api.pvp.net/api/lol/' + req.query.region + '/v1.3/game/by-summoner/'+req.query.userid+'/recent?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
-      console.log(context.riot.games[0].gameMode);
-      context.mode1=context.riot.games[0].gameMode;
-      context.champused1=context.riot.games[0].championId;
-      context.gtype1=context.riot.games[0].gameType;
-      context.ip1=context.riot.games[0].ipEarned;
-      context.kills1=context.riot.games[0].championsKilled;
-      context.deaths1=context.riot.games[0].numDeaths;
-      context.assists1=context.riot.games[0].assists;
-      context.mode2=context.riot.games[1].gameMode;
-      context.champused2=context.riot.games[1].championId;
-      context.gtype2=context.riot.games[1].gameType;
-      context.ip2=context.riot.games[1].ipEarned;
-      context.kills2=context.riot.games[1].championsKilled;
-      context.deaths2=context.riot.games[1].numDeaths;
-      context.assists2=context.riot.games[1].assists;
+    //  console.log(context.riot.games[0].gameMode);
+  //    context.mode1=context.riot.games[0].gameMode;
+  //    context.champused1=context.riot.games[0].championId;
+  //    context.gtype1=context.riot.games[0].gameType;
+  //    context.ip1=context.riot.games[0].ipEarned;
+  //    context.deaths1=context.riot.games[0].numDeaths;
+  //    context.assists1=context.riot.games[0].assists;
+  //    context.mode2=context.riot.games[1].gameMode;
+   //   context.champused2=context.riot.games[1].championId;
+   //  context.gtype2=context.riot.games[1].gameType;
+   //   context.ip2=context.riot.games[1].ipEarned;
+   //   context.kills2=context.riot.games[1].championsKilled;
+   //   context.deaths2=context.riot.games[1].numDeaths;
+   //   context.assists2=context.riot.games[1].assists;
      res.render('userid',context);
    
       
