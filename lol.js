@@ -34,7 +34,7 @@ app.get('/recentgames', function(req, res, next){
      context.kills2=context.riot.games[1].championsKilled;
       context.deaths2=context.riot.games[1].numDeaths;
       context.assists2=context.riot.games[1].assists;
-     res.render('userid',context);
+     res.render('recent',context);
    
       
     } else {
