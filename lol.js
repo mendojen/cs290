@@ -26,15 +26,16 @@ app.get('/recentgames', function(req, res, next){
      context.champused1=context.riot.games[0].championId;
       context.gtype1=context.riot.games[0].gameType;
       context.ip1=context.riot.games[0].ipEarned;
+      context.kills1=context.riot.games[0].stats.championsKilled;
       context.deaths1=context.riot.games[0].stats.numDeaths;
-      context.assists1=context.riot.games[0].assists;
+      context.assists1=context.riot.games[0].stats.assists;
       context.mode2=context.riot.games[1].gameMode;
       context.champused2=context.riot.games[1].championId;
      context.gtype2=context.riot.games[1].gameType;
       context.ip2=context.riot.games[1].ipEarned;
-     context.kills2=context.riot.games[1].championsKilled;
-      context.deaths2=context.riot.games[1].numDeaths;
-      context.assists2=context.riot.games[1].assists;
+     context.kills2=context.riot.games[1].stats.championsKilled;
+      context.deaths2=context.riot.games[1].stats.numDeaths;
+      context.assists2=context.riot.games[1].stats.assists;
      res.render('recent',context);
    
       
