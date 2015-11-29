@@ -53,6 +53,10 @@ app.get('/summonerid', function(req, res, next){
   request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
+      var oparsed=JSON.parse(body);
+      context.id=oparsed.thewillowtree.id;
+      context.name=oparsed.thewillowtree.name;
+      console.log(context.id);
       res.render('userid',context);
     } else {
       if(response){
