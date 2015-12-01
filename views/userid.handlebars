@@ -1,6 +1,12 @@
 <h1>The Summoner Id is:</h1>
 <pre>{{riot}}</pre>
-<form action="http://52.25.198.76:3000/">
-    <input type="submit" value="Go back">
-</form>
+  <form action="http://52.25.198.76:3000/recentgames" method="GET">
+  <legend><h2>Enter a region and Summoner ID</h2></legend>
+  <label for="region">Region</label>
+  <input type="text" name="region" id="region"> 
+  <label for="userid">Summoner ID</label>
+  <input type="text" name="userid" id="userid">
+  <input type="submit" name="recent_games" value="Get Recent games">
+  </form>
+</div>
 
