@@ -67,9 +67,6 @@ app.get('/summonerid', function(req, res, next){
   request('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + req.query.user +'?api_key=' + credentials.riotKey, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.riot = body;
-      var bodyparsed=JSON.parse(body);
-      var user_input=req.query.user;
-     console.log(context.riot.user_input.id);
       res.render('userid',context);
     } else {
       if(response){
