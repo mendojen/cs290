@@ -43,6 +43,7 @@ app.get('/insert',function(req,res,next){
             console.log('good?');
             context = rows;
             res.send(context);
+    });
   });
 });
 
