@@ -11,9 +11,6 @@ app.set('view engine', 'handlebars');
 app.set('port',3000)
 
 
-//http.createServer(function(req,res){
-//	res.writeHead(200,{'Content-Type':'text/plain'});
-//}).listen(3000);
 
 app.get('/',function(req,res,next){
   var context = {};
@@ -35,7 +32,7 @@ app.get('/insert',function(req,res,next){
       return;
     }
     context.results = "Inserted id " + result.insertId;
-    res.send(JSON.stringify(rows));
+        res.render('home', context);
   });
 });
 
