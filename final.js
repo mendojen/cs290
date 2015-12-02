@@ -29,13 +29,13 @@ app.get('/',function(req,res,next){
 
 app.get('/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO todo (`name`) VALUES (?)", [req.query.c], function(err, result){
+  mysql.pool.query("INSERT INTO workout (`name`,`reps`,`weight`,`date`,`lbs`) VALUES (?,?,?,?,?)", [req.query.name],[req.query.reps],[req.query.weight],[req.query.date],[req.query.pounds], function(err, result){
     if(err){
       next(err);
       return;
     }
     context.results = "Inserted id " + result.insertId;
-    res.render('home',context);
+    res.send(JSON.stringify(rows));
   });
 });
 
