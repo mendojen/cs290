@@ -32,7 +32,17 @@ app.get('/insert',function(req,res,next){
       return;
     }
     context.results = "Inserted id " + result.insertId;
-        res.render('home', context);
+    var newRowId = result.insertId;
+
+    mysql.pool.query('SELECT * FROM workout WHERE id=?', [newRowId], function(err, rows, fields) {
+
+            if (err) {
+                next(err);
+                return;
+            }
+            console.log('good?');
+            context = rows;
+            res.send(context);
   });
 });
 
