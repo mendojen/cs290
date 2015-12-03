@@ -117,7 +117,7 @@ app.get('/updateweight',function(req,res,next){
 app.get('/updatedate',function(req,res,next){
   var context = {};
   mysql.pool.query("UPDATE workouts SET date=? WHERE id=? ",
-    [req.query.date, req.query.eid],
+    [req.query.edate, req.query.eid],
     function(err, result){
     if(err){
       next(err);
