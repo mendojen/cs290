@@ -102,7 +102,7 @@ app.get('/updatereps',function(req,res,next){
 });
 app.get('/updateweight',function(req,res,next){
   var context = {};
-  mysql.pool.query("UPDATE workouts SET weights=? WHERE id=? ",
+  mysql.pool.query("UPDATE workouts SET weight=? WHERE id=? ",
     [req.query.eweight, req.query.eid],
     function(err, result){
     if(err){
