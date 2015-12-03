@@ -40,7 +40,6 @@ app.get('/insert',function(req,res,next){
                 next(err);
                 return;
             }
-            console.log('good?');
             context = rows;
             res.send(JSON.stringify(rows));
     });
