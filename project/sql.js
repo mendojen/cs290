@@ -20,9 +20,10 @@ app.get('/select',function(req,res,next){
       return;
     }
     context.results = JSON.stringify(rows);
-    res.render('home',context);
+    res.send(JSON.stringify(rows));
   });
 });
+
 
 app.get('/insert',function(req,res,next){
   var context = {};
