@@ -74,10 +74,10 @@ app.get('/reset-table',function(req,res,next){
   });
 });
 
-app.get('/simple-update',function(req,res,next){
+app.get('/updatename',function(req,res,next){
   var context = {};
-  mysql.pool.query("UPDATE todo SET name=?, done=?, due=? WHERE id=? ",
-    [req.query.name, req.query.done, req.query.due, req.query.id],
+  mysql.pool.query("UPDATE workouts SET name=? WHERE id=? ",
+    [req.query.ename, req.query.eid],
     function(err, result){
     if(err){
       next(err);
@@ -87,6 +87,7 @@ app.get('/simple-update',function(req,res,next){
     res.render('home',context);
   });
 });
+
 app.get('/delete', function(req,res,next){
 	var context={};
 	mysql.pool.query("DELETE FROM todo WHERE id=?", [req.query.id], function (err, result){
