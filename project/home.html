@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<script src="database.js"></script>
+
+
+
+<body>
+  <head>
+	<meta charset="utf-8">
+   <title>Workouts</title>
+  </head>
+  
+	<h1>Workouts</h1>
+	<body onload="loaded()">
+  	<tr>
+        <td>Name:</td>
+        <td><input type="text" id="wname"></td>
+    </tr>
+    <tr>
+        <td>Reps:</td>
+        <td><input type="text" id="reps">
+	</tr>
+	 <tr>
+        <td>Weight:</td>
+        <td><input type="text" id="weight"></td> 
+    </tr>
+	 <tr>
+        <td>Date:</td>
+        <td><input type="text" id="date"></td>
+    </tr>
+	 <tr>
+        <td>Pounds:</td>
+        <td><input type="text" id="pounds"></td>
+        <input type="button" id="add" value="Add Information" onclick="bindButtons()"></td>
+    </tr>
+	<div>
+	<p>
+<table id="workout_table"  border="1" cellpadding="2">
+    <tr>
+        <td>&nbsp;</td>
+        <td><b>Name</b></td>
+        <td><b>Reps</b></td>
+		<td><b>Weight</b></td>
+        <td><b>Date</b></td>
+        <td><b>Pounds</b></td>
+    </tr>
+</table>
+</p>
+ </div>
+
+</body>
+</html>
