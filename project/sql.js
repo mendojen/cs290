@@ -47,7 +47,16 @@ app.get('/insert',function(req,res,next){
   });
 });
 
-
+app.get('/delete',function(req,res,next){
+  var context = {};
+  mysql.pool.query("DELETE FROM workouts WHERE id=?", [req.query.delete_id], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    });
+  });
+  
 app.get('/reset-table',function(req,res,next){
   var context = {};
   mysql.pool.query("DROP TABLE IF EXISTS workouts", function(err){ //replace your connection pool with the your variable containing the connection pool
