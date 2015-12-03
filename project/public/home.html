@@ -11,7 +11,7 @@
   </head>
   
 	<h1>Workouts</h1>
-	<body onload="loaded()">
+	<p><b> Enter the information you would like to add.</b></p>
   	<tr>
         <td>Name:</td>
         <td><input type="text" id="wname"></td>
@@ -33,20 +33,43 @@
         <td><input type="text" id="pounds"></td>
         <input type="button" id="add" value="Add Information" onclick="bindButtons()"></td>
     </tr>
-	<div>
-	<p>
-<table id="workout_table"  border="1" cellpadding="2">
-    <tr>
-        <td>&nbsp;</td>
-        <td><b>Name</b></td>
-        <td><b>Reps</b></td>
-		<td><b>Weight</b></td>
-        <td><b>Date</b></td>
-        <td><b>Pounds</b></td>
+	<p><b> Enter the id of the row you would like to delete</b></p>
+	<td>ID:</td>
+	<td><input type="text" id="delete_id"></td>
+    <input type="button" id="delete" value="Delete Row" onclick="bindButtons()"></td>
+	<body onload="loaded()">
+	<p><b>Enter the id of the row you would like to edit/update. Then fill in the following form accordingly.</b></p>
+	  	<tr>
+		<td>ID:</td>
+		<td><input type="text" id="eid"></td>
+        <td>Name:</td>
+        <td><input type="text" id="ename"></td>
+		<input type="button" id="uname" value="Update Name" onclick="bindButtons()"></td>
     </tr>
-</table>
-</p>
- </div>
+    <tr>
+        <td>Reps:</td>
+        <td><input type="text" id="ereps">
+		<input type="button" id="ureps" value="Update Reps" onclick="bindButtons()"></td>
+	</tr>
+	 <tr>
+        <td>Weight:</td>
+        <td><input type="text" id="eweight"></td> 
+		<input type="button" id="uweight" value="Update Weight" onclick="bindButtons()"></td>
+    </tr>
+	 <tr>
+        <td>Date:</td>
+        <td><input type="text" id="edate"></td>
+		<input type="button" id="udate" value="Update Date" onclick="bindButtons()"></td>
+    </tr>
+	 <tr>
+        <td>Pounds:</td>
+        <td><input type="text" id="epounds"></td>
+        <input type="button" id="upounds" value="Update Pounds" onclick="bindButtons()"></td>
+    </tr>
+	<br>
+	<br>
+	<h2> Table Contents </h2>
+	<body onload="loaded()">
 
 </body>
 </html>
