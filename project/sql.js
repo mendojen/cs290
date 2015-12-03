@@ -87,7 +87,60 @@ app.get('/updatename',function(req,res,next){
     res.render('home',context);
   });
 });
+app.get('/updatereps',function(req,res,next){
+  var context = {};
+  mysql.pool.query("UPDATE workouts SET reps=? WHERE id=? ",
+    [req.query.ereps, req.query.eid],
+    function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = "Updated " + result.changedRows + " rows.";
+    res.render('home',context);
+  });
+});
+app.get('/updateweight',function(req,res,next){
+  var context = {};
+  mysql.pool.query("UPDATE workouts SET weights=? WHERE id=? ",
+    [req.query.eweight, req.query.eid],
+    function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = "Updated " + result.changedRows + " rows.";
+    res.render('home',context);
+  });
+});
 
+app.get('/updatedate',function(req,res,next){
+  var context = {};
+  mysql.pool.query("UPDATE workouts SET date=? WHERE id=? ",
+    [req.query.date, req.query.eid],
+    function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = "Updated " + result.changedRows + " rows.";
+    res.render('home',context);
+  });
+});
+
+app.get('/updatepounds',function(req,res,next){
+  var context = {};
+  mysql.pool.query("UPDATE workouts SET lbs=? WHERE id=? ",
+    [req.query.pounds, req.query.eid],
+    function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = "Updated " + result.changedRows + " rows.";
+    res.render('home',context);
+  });
+});
 app.get('/delete', function(req,res,next){
 	var context={};
 	mysql.pool.query("DELETE FROM todo WHERE id=?", [req.query.id], function (err, result){
