@@ -1,5 +1,5 @@
 var express= require('express');
-var mysql= require('./database.js');
+var mysql= require('./info.js');
 var http= require('http');
 
 
