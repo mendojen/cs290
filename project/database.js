@@ -37,8 +37,9 @@ if (typeof module != "undefined" && module.exports)
     });
 
     return table;
+    document.body.appendChild(buildTable(MOUNTAINS));
   }
-document.body(buildTable(MOUNTAINS));
+
 
 
 if (typeof module != "undefined" && module.exports)
