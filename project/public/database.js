@@ -44,12 +44,28 @@
 		req.send();
  }
   
+   function reloaded(event){
+		var table = document.getElementById("myTable");
+	//	table.parentNode.removeChild(table);
+		var req = new XMLHttpRequest();
+		
+		req.open("GET", 'http://52.25.198.76:3000/select', true);
+		req.addEventListener('load', function(){
+			if (req.status >= 200 && req.status < 400){
+				
+				var response = JSON.parse(req.responseText);			
+				document.body.appendChild(buildTable(response));
+				}
+			});
+		req.send();
+ }
 document.addEventListener('DOMContentLoaded', bindButtons);
 //Depending on which button is pushed, that specific event function is called
 function bindButtons()
  {
  document.getElementById('add').addEventListener('click', function(event)
 	{
+		
 		var req = new XMLHttpRequest();
 		var wname = document.getElementById('wname').value ;
 		var reps = document.getElementById("reps").value;
@@ -57,34 +73,116 @@ function bindButtons()
 		var date = document.getElementById("date").value;
 		var pounds = document.getElementById("pounds").value;
 		
+		if (wname!=""){
 		req.open("GET", 'http://52.25.198.76:3000/insert?wname='+ wname +'&reps='+reps+'&weight='+weight+'&date='+date+'&pounds='+pounds, true);
 		req.addEventListener('load', function(){
 			if (req.status >= 200 && req.status <400){
 			addrow(wname,reps,weight,date,pounds);
+//			cleartable();
+//			reloaded();
 			}
 		});
-		/*
+		req.send(null);
+		event.preventDefault(); 
+		} else {
+			alert("Not added. Name input missing");
+		}		
+	})
+	document.getElementById('delete').addEventListener('click', function(event)
+	{
+		
+		var req = new XMLHttpRequest();
+		var deleteID = document.getElementById('delete_id').value ;
+		
+		
+		req.open("GET", 'http://52.25.198.76:3000/delete?delete_id=' +deleteID, true);
 		req.addEventListener('load', function(){
-		if (req.status >= 200 && req.status <400){
-		var response = JSON.parse(req.responseText);
-		alert(response[0].name);
-		for (var i = 0; i < response.length; ++i) {
-		 wname = response[i].name;
-		 reps = response[i].reps;
-		 weight=response[i].weight;
-		 date = response[i].date;
-		 pounds = response[i].pounds;
-		}
-
-
-		} else{
-		console.log("error in network request:" +req.statusText);
-		}})
-		*/
+			if (req.status >= 200 && req.status <400){
+			}
+		});
 		req.send(null);
 		event.preventDefault();  	
 	})
+	document.getElementById('uname').addEventListener('click', function(event)
+	{
+		
+		var req = new XMLHttpRequest();
+		var new_name = document.getElementById('ename').value ;
+		var selected_id=document.getElementById('eid').value;
+		
+		req.open("GET", 'http://52.25.198.76:3000/updatename?ename=' + new_name + '&eid='+selected_id, true);
+		req.addEventListener('load', function(){
+			if (req.status >= 200 && req.status <400){
+			}
+		});
+		req.send(null);
+		event.preventDefault();  	
+	})
+	document.getElementById('ureps').addEventListener('click', function(event)
+	{
+		
+		var req = new XMLHttpRequest();
+		var new_rep = document.getElementById('ereps').value ;
+		var selected_id=document.getElementById('eid').value;
+		
+		req.open("GET", 'http://52.25.198.76:3000/updatereps?ereps=' + new_rep + '&eid='+selected_id, true);
+		req.addEventListener('load', function(){
+			if (req.status >= 200 && req.status <400){
+			}
+		});
+		req.send(null);
+		event.preventDefault();  	
+	})
+	document.getElementById('uweight').addEventListener('click', function(event)
+	{
+		
+		var req = new XMLHttpRequest();
+		var new_weight = document.getElementById('eweight').value ;
+		var selected_id=document.getElementById('eid').value;
+		
+		req.open("GET", 'http://52.25.198.76:3000/updateweight?eweight=' + new_weight + '&eid='+selected_id, true);
+		req.addEventListener('load', function(){
+			if (req.status >= 200 && req.status <400){
+			}
+		});
+		req.send(null);
+		event.preventDefault();  	
+	})
+	document.getElementById('udate').addEventListener('click', function(event)
+	{
+		
+		var req = new XMLHttpRequest();
+		var new_date = document.getElementById('edate').value ;
+		var selected_id=document.getElementById('eid').value;
+		
+		req.open("GET", 'http://52.25.198.76:3000/updatedate?edate=' + new_date + '&eid='+selected_id, true);
+		req.addEventListener('load', function(){
+			if (req.status >= 200 && req.status <400){
+			}
+		});
+		req.send(null);
+		event.preventDefault();  	
+	})
+	document.getElementById('upounds').addEventListener('click', function(event)
+	{
+		var req = new XMLHttpRequest();
+		var new_pounds = document.getElementById('epounds').value ;
+		var selected_id=document.getElementById('eid').value;
+		req.open("GET", 'http://52.25.198.76:3000/updatepounds?epounds=' + new_pounds + '&eid='+selected_id, true);
+		req.addEventListener('load', function(){
+			if (req.status >= 200 && req.status <400){
+			}
+		});
+		req.send(null);
+		event.preventDefault();  	
+	})
+	
  }
+ function cleartable(){
+	var table = document.getElementById("myTable");
+	document.body.deleteChild(table);
+	}
+ 
 
  
  function addrow(wname, reps, weight, date, pounds){
@@ -94,9 +192,10 @@ function bindButtons()
 	 //Name
 	 var cell = document.createElement("td");
         cell.textContent = wname;
-        if (typeof wname == "number")
+        if (typeof wname == "text")
           cell.style.textAlign = "right";
         row.appendChild(cell);
+
     
 	//reps
 	cell.textContent = reps;
@@ -108,12 +207,56 @@ function bindButtons()
 	cell.textContent = weight;
         if (typeof weight == "number")
           cell.style.textAlign = "right";
+        row.appendChild(cell);	
+      table.appendChild(row);
+	      //date
+	cell.textContent = date;
+        if (typeof date == "date")
+          cell.style.textAlign = "right";
+        row.appendChild(cell);	
+      table.appendChild(row);
+	      //weight
+	cell.textContent = pounds;
+        if (typeof pounds == "number")
+        cell.style.textAlign = "right";
+        row.appendChild(cell);	
+      table.appendChild(row);
+}
+ function deleterow(wname, reps, weight, date, pounds){
+	 var table = document.getElementById("myTable");
+	 
+	 var row = document.createElement("tr");
+	 //Name
+	 var cell = document.createElement("td");
+        cell.textContent = wname;
+        if (typeof wname == "text")
+          cell.style.textAlign = "right";
         row.appendChild(cell);
-		    //weight
-	cell.textContent = weight;
-        if (typeof weight == "number")
+
+    
+	//reps
+	cell.textContent = reps;
+        if (typeof reps == "number")
           cell.style.textAlign = "right";
         row.appendChild(cell);
 		
+    //weight
+	cell.textContent = weight;
+        if (typeof weight == "number")
+          cell.style.textAlign = "right";
+        row.appendChild(cell);	
       table.appendChild(row);
- }
+	      //date
+	cell.textContent = date;
+        if (typeof date == "date")
+          cell.style.textAlign = "right";
+        row.appendChild(cell);	
+      table.appendChild(row);
+	      //weight
+	cell.textContent = pounds;
+        if (typeof pounds == "number")
+        cell.style.textAlign = "right";
+        row.appendChild(cell);	
+      table.appendChild(row);
+}
+ 
