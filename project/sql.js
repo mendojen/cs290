@@ -141,39 +141,7 @@ app.get('/updatepounds',function(req,res,next){
     res.render('home',context);
   });
 });
-app.get('/delete', function(req,res,next){
-	var context={};
-	mysql.pool.query("DELETE FROM todo WHERE id=?", [req.query.id], function (err, result){
-		if(err){
-			next(err);
-			return;
-		}
-		context.results="Deleted "+result.changedRows+" rows.";
-		res.render('home', context);
-	});
-});
-app.get('/safe-update',function(req,res,next){
-  var context = {};
-  mysql.pool.query("SELECT * FROM todo WHERE id=?", [req.query.id], function(err, result){
-    if(err){
-      next(err);
-      return;
-    }
-    if(result.length == 1){
-      var curVals = result[0];
-      mysql.pool.query("UPDATE todo SET name=?, done=?, due=? WHERE id=? ",
-        [req.query.name || curVals.name, req.query.done || curVals.done, req.query.due || curVals.due, req.query.id],
-        function(err, result){
-        if(err){
-          next(err);
-          return;
-        }
-        context.results = "Updated " + result.changedRows + " rows.";
-        res.render('home',context);
-      });
-    }
-  });
-});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
