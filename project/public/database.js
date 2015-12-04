@@ -3,40 +3,72 @@
     var table = document.createElement("table");
 	var btn = document.createElement("BUTTON");
 	table.id = "myTable";
-  
-    var fields = Object.keys(data[0]);
     var headRow = document.createElement("tr");
-    fields.forEach(function(field) {
-      var headCell = document.createElement("th");
-      headCell.textContent = field;
-      headRow.appendChild(headCell);
-	  headCell.style.border="thin solid black";
-	  headCell.style.textContent="5px";
-    });
-    table.appendChild(headRow);
+	var headCell = document.createElement("th");
+	headCell.textContent = "ID";
+	headRow.appendChild(headCell);
+	headCell.style.border="thin solid black";
+	headCell.style.textContent="5px";
+	
+	var headCell = document.createElement("th");
+	headCell.textContent = "Name";
+	headRow.appendChild(headCell);
+	headCell.style.border="thin solid black";
+	headCell.style.textContent="5px";
+	
+	var headCell = document.createElement("th");
+	headCell.textContent = "Reps";
+	headRow.appendChild(headCell);
+	headCell.style.border="thin solid black";
+	headCell.style.textContent="5px";
+	
+	var headCell = document.createElement("th");
+	headCell.textContent = "Weight";
+	headRow.appendChild(headCell);
+	headCell.style.border="thin solid black";
+	headCell.style.textContent="5px";
+	
+	var headCell = document.createElement("th");
+	headCell.textContent = "Date";
+	headRow.appendChild(headCell);
+	headCell.style.border="thin solid black";
+	headCell.style.textContent="5px";
+	
+	var headCell = document.createElement("th");
+	headCell.textContent = "Pounds";
+	headRow.appendChild(headCell);
+	headCell.style.border="thin solid black";
+	headCell.style.textContent="5px";
+	
+	table.appendChild(headRow);
 	table.style.borderSpacing = '0px';
-    data.forEach(function(object) {
-      var row = document.createElement("tr");
-      fields.forEach(function(field) {
-        var cell = document.createElement("td");
-        cell.textContent = object[field];
-        if (typeof object[field] == "number")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);
-		cell.style.border= "thin solid black";
-	  
-      });
-      table.appendChild(row);
-		
-    }); 
-		
+	
+	if (data[0]!=null){ 
+		var fields = Object.keys(data[0]);
+		data.forEach(function(object) {
+		  var row = document.createElement("tr");
+		  fields.forEach(function(field) {
+			var cell = document.createElement("td");
+			cell.textContent = object[field];
+			if (typeof object[field] == "number")
+			  cell.style.textAlign = "right";
+			row.appendChild(cell);
+			cell.style.border= "thin solid black";
+		  
+		  });
+		  table.appendChild(row);
+			
+		}); 
+	}
+	
     return table;
  
-  }
+ }
 
 
 
  function loaded(event){
+	    //bindButtons();
 		var req = new XMLHttpRequest();
 		
 		req.open("GET", 'http://52.25.198.76:3000/select', true);
@@ -48,18 +80,20 @@
 				}
 			});
 		req.send();
+		
  }
   
    function reloaded(event){
 		var table = document.getElementById("myTable");
-		while(table.rows.length) {
+/*		while(table.rows.length) {
 			table.deleteRow(0);
-		}
+		}*/
 		var req = new XMLHttpRequest();
 		
 		req.open("GET", 'http://52.25.198.76:3000/select', true);
 		req.addEventListener('load', function(){
 			if (req.status >= 200 && req.status < 400){
+				table.parentNode.removeChild(table);
 				var response = JSON.parse(req.responseText);			
 				document.body.appendChild(buildTable(response));
 				}
@@ -80,7 +114,8 @@ document.addEventListener('DOMContentLoaded', bindButtons);
  
 function bindButtons()
  {
- document.getElementById('add').addEventListener('click', function(event)
+	 
+	var myhandle = function(event)
 	{
 		var table = document.getElementById("myTable");
 		var req = new XMLHttpRequest();
@@ -92,21 +127,24 @@ function bindButtons()
 		
 		if (wname!=""){
 		req.open("GET", 'http://52.25.198.76:3000/insert?wname='+ wname +'&reps='+reps+'&weight='+weight+'&date='+date+'&pounds='+pounds, true);
-		req.addEventListener('load', function(){
-			if (req.status >= 200 && req.status <400){
-			addrow(wname,reps,weight,date,pounds);
-//			cleartable();
-//			reloaded();
-//			table.parentNode.removeChild(table);
-			reloaded(table);
+		
+		req.onreadystatechange=function() {
+		if (req.readyState == 4 && req.status == 200) {
+			  addrow(wname,reps,weight,date,pounds);
 			}
-		});
+		  };
+		
 		req.send(null);
 		event.preventDefault(); 
 		} else {
 			alert("Not added. Name input missing");
-		}		
-	})
+		}	
+      		
+	};
+    document.getElementById('add').addEventListener('click', myhandle);
+    
+	
+	
 	document.getElementById('delete').addEventListener('click', function(event)
 	{
 		
@@ -122,7 +160,7 @@ function bindButtons()
 		});
 		req.send(null);
 		event.preventDefault();  	
-	})
+	});
 	document.getElementById('uname').addEventListener('click', function(event)
 	{
 		
@@ -138,7 +176,7 @@ function bindButtons()
 		req.send(null);
 		event.preventDefault();
 		}		
-	})
+	});
 	document.getElementById('ureps').addEventListener('click', function(event)
 	{
 		
@@ -154,7 +192,7 @@ function bindButtons()
 		req.send(null);
 		event.preventDefault(); 
 		}		
-	})
+	});
 	document.getElementById('uweight').addEventListener('click', function(event)
 	{
 		
@@ -170,7 +208,7 @@ function bindButtons()
 		req.send(null);
 		event.preventDefault();  
 		}		
-	})
+	});
 	document.getElementById('udate').addEventListener('click', function(event)
 	{
 		
@@ -186,7 +224,7 @@ function bindButtons()
 		req.send(null);
 		event.preventDefault();  
 		}
-	})
+	});
 	document.getElementById('upounds').addEventListener('click', function(event)
 	{
 		var req = new XMLHttpRequest();
@@ -198,10 +236,11 @@ function bindButtons()
 			if (req.status >= 200 && req.status <400){
 			}
 		});
+		
 		req.send(null);
 		event.preventDefault();  	
 		}
-	})
+	});
 	
  }
 
@@ -209,41 +248,31 @@ function bindButtons()
  
  function addrow(wname, reps, weight, date, pounds){
 	var table = document.getElementById("myTable");
-	var row = document.createElement("tr");	 
-   
+	var row1 = table.insertRow(table.rows.length);
 	
-	 //Name
-	 var cell = document.createElement("td");
-        cell.textContent = wname;
-        if (typeof wname == "text")
-         cell.style.textAlign = "right";
-        row.appendChild(cell);
-    
-	//reps
-	cell.textContent = reps;
-        if (typeof reps == "number")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);
-		
-    //weight
-	cell.textContent = weight;
-        if (typeof weight == "number")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);	
-     
-	      //date
-	cell.textContent = date;
-        if (typeof date == "date")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);	
-     
-	      //weight
-	cell.textContent = pounds;
-        if (typeof pounds == "number")
-        cell.style.textAlign = "right";
-        row.appendChild(cell);	
-      table.appendChild(row);
-	  
+	var cell1 = row1.insertCell(0);
+	cell1.textContent = table.rows.length;
+	cell1.style.border= "thin solid black";
+	
+	var cell1 = row1.insertCell(1);
+	cell1.textContent = wname;
+	cell1.style.border= "thin solid black";
+	
+	var cell1 = row1.insertCell(2);
+	cell1.textContent = reps;
+	cell1.style.border= "thin solid black";
+	
+	var cell1 = row1.insertCell(3);
+	cell1.textContent = weight;
+	cell1.style.border= "thin solid black";
+	
+	var cell1 = row1.insertCell(4);
+	cell1.textContent = date;
+	cell1.style.border= "thin solid black";
+	
+	var cell1 = row1.insertCell(5);
+	cell1.textContent = pounds;
+	cell1.style.border= "thin solid black";
 	  
 }
  function deleterow(wname, reps, weight, date, pounds){
