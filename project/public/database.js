@@ -231,7 +231,7 @@ function updatepounds()
 		reloaded();
 }
 
- function addrow(id,wname, reps, weight, date, pounds){
+ /*function addrow(id,wname, reps, weight, date, pounds){
 	var table = document.getElementById("myTable");
 	var row1 = table.insertRow(table.rows.length);
 	
@@ -259,43 +259,6 @@ function updatepounds()
 	cell1.textContent = pounds;
 	cell1.style.border= "thin solid black";
 	  
-}
- function deleterow(wname, reps, weight, date, pounds){
-	 var table = document.getElementById("myTable");
-	 
-	 var row = document.createElement("tr");
-	 //Name
-	 var cell = document.createElement("td");
-        cell.textContent = wname;
-        if (typeof wname == "text")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);
+}*/
 
-    
-	//reps
-	cell.textContent = reps;
-        if (typeof reps == "number")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);
-		
-    //weight
-	cell.textContent = weight;
-        if (typeof weight == "number")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);	
-      table.appendChild(row);
-	      //date
-	cell.textContent = date;
-        if (typeof date == "date")
-          cell.style.textAlign = "right";
-        row.appendChild(cell);	
-      table.appendChild(row);
-	      //weight
-	cell.textContent = pounds;
-        if (typeof pounds == "number")
-        cell.style.textAlign = "right";
-        row.appendChild(cell);	
-      table.appendChild(row);
-
-}
  
